@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import emailjs from "@emailjs/browser";
 import {
   Send,
   Mail,
@@ -16,6 +17,7 @@ import {
 const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [hoveredSocial, setHoveredSocial] = useState(null);
   const containerRef = useRef(null);
@@ -26,6 +28,12 @@ const ContactSection = () => {
     message: "",
   });
   const [errors, setErrors] = useState({});
+
+  // Initialize EmailJS
+  useEffect(() => {
+    // Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS public key
+    emailjs.init("YOUR_PUBLIC_KEY");
+  }, []);
 
   // Mouse tracking for 3D effects
   useEffect(() => {
@@ -66,6 +74,9 @@ const ContactSection = () => {
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
+    if (submitError) {
+      setSubmitError(null);
+    }
   };
 
   const onSubmit = async (e) => {
@@ -73,14 +84,38 @@ const ContactSection = () => {
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    setSubmitError(null);
 
-    console.log("Form submitted:", formData);
-    setIsSubmitted(true);
-    setIsSubmitting(false);
-    setFormData({ name: "", email: "", message: "" });
+    try {
+      // EmailJS configuration
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+        to_name: "John Wesley", // Your name
+        reply_to: formData.email,
+      };
 
-    setTimeout(() => setIsSubmitted(false), 5000);
+      // Send email using EmailJS
+      // Replace these with your actual EmailJS service ID and template ID
+      const result = await emailjs.send(
+        "YOUR_SERVICE_ID", // Replace with your EmailJS service ID
+        "YOUR_TEMPLATE_ID", // Replace with your EmailJS template ID
+        templateParams
+      );
+
+      console.log("Email sent successfully:", result);
+      setIsSubmitted(true);
+      setFormData({ name: "", email: "", message: "" });
+      setTimeout(() => setIsSubmitted(false), 5000);
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      setSubmitError(
+        "Failed to send message. Please try again or contact me directly at johnwesley8113@gmail.com"
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const FloatingOrb = ({ size, color, delay, duration }) => (
@@ -512,6 +547,12 @@ const ContactSection = () => {
                   </div>
                 ) : (
                   <div className="space-y-6">
+                    {submitError && (
+                      <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 mb-6">
+                        <p className="text-red-400 text-sm">{submitError}</p>
+                      </div>
+                    )}
+
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <label className="block text-gray-300 font-medium text-sm">
@@ -520,10 +561,12 @@ const ContactSection = () => {
                         <div className="relative">
                           <input
                             name="name"
+                            type="text"
                             value={formData.name}
                             onChange={handleInputChange}
                             className="w-full px-4 py-4 bg-gray-800/50 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm"
                             placeholder="Your name"
+                            required
                           />
                           {errors.name && (
                             <p className="text-red-400 text-sm mt-1">
@@ -545,6 +588,7 @@ const ContactSection = () => {
                             onChange={handleInputChange}
                             className="w-full px-4 py-4 bg-gray-800/50 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm"
                             placeholder="your.email@example.com"
+                            required
                           />
                           {errors.email && (
                             <p className="text-red-400 text-sm mt-1">
@@ -566,6 +610,7 @@ const ContactSection = () => {
                         rows={6}
                         className="w-full px-4 py-4 bg-gray-800/50 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm resize-none"
                         placeholder="Tell me about your project or just say hello..."
+                        required
                       />
                       {errors.message && (
                         <p className="text-red-400 text-sm mt-1">
@@ -577,7 +622,6 @@ const ContactSection = () => {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      onClick={onSubmit}
                       className="w-full group relative bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white py-4 px-8 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg hover:shadow-purple-500/50"
                     >
                       <span className="flex items-center justify-center gap-3">
