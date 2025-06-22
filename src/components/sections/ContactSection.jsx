@@ -334,6 +334,7 @@ const ContactSection = () => {
 
   return (
     <section
+      id="contact"
       ref={containerRef}
       className="relative min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 overflow-hidden"
     >
@@ -647,7 +648,8 @@ const ContactSection = () => {
                       )}
                     </div>
 
-                    <button onClick={onSubmit}
+                    <button
+                      onClick={onSubmit}
                       type="submit"
                       disabled={isSubmitting}
                       className="w-full group relative bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white py-4 px-8 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg hover:shadow-purple-500/50"
