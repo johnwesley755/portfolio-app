@@ -34,7 +34,6 @@ const AboutSection = () => {
         { name: "MongoDB", icon: "🍃", color: "#47A248" },
         { name: "MySQL", icon: "🐬", color: "#4479A1" },
         { name: "Firebase", icon: "🔥", color: "#FFCA28" },
-        { name: "PostgreSQL", icon: "🐘", color: "#336791" },
       ],
       gradient: "from-purple-500 via-violet-500 to-indigo-500",
     },

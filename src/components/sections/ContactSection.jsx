@@ -29,10 +29,26 @@ const ContactSection = () => {
   });
   const [errors, setErrors] = useState({});
 
-  // Initialize EmailJS
+  // Initialize EmailJS with environment variables
+  // Updated useEffect for EmailJS initialization
   useEffect(() => {
-    // Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS public key
-    emailjs.init("YOUR_PUBLIC_KEY");
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    console.log("Environment check:", {
+      publicKey: publicKey ? "Found" : "Missing",
+      allEnvVars: Object.keys(import.meta.env).filter((key) =>
+        key.startsWith("VITE_")
+      ),
+    });
+
+    if (publicKey) {
+      emailjs.init(publicKey);
+    } else {
+      console.error("EmailJS public key not found in environment variables");
+      setSubmitError(
+        "Email service configuration error. Please contact me directly."
+      );
+    }
   }, []);
 
   // Mouse tracking for 3D effects
@@ -79,30 +95,42 @@ const ContactSection = () => {
     }
   };
 
+  // Updated onSubmit function
   const onSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
+
+    // Check if EmailJS is properly configured
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    console.log("EmailJS config check:", {
+      serviceId: serviceId ? "Found" : "Missing",
+      templateId: templateId ? "Found" : "Missing",
+      publicKey: publicKey ? "Found" : "Missing",
+    });
+
+    if (!serviceId || !templateId || !publicKey) {
+      setSubmitError(
+        "Email service is not properly configured. Please contact me directly at johnwesley8113@gmail.com"
+      );
+      return;
+    }
 
     setIsSubmitting(true);
     setSubmitError(null);
 
     try {
-      // EmailJS configuration
       const templateParams = {
         from_name: formData.name,
         from_email: formData.email,
         message: formData.message,
-        to_name: "John Wesley", // Your name
+        to_name: "John Wesley",
         reply_to: formData.email,
       };
 
-      // Send email using EmailJS
-      // Replace these with your actual EmailJS service ID and template ID
-      const result = await emailjs.send(
-        "YOUR_SERVICE_ID", // Replace with your EmailJS service ID
-        "YOUR_TEMPLATE_ID", // Replace with your EmailJS template ID
-        templateParams
-      );
+      const result = await emailjs.send(serviceId, templateId, templateParams);
 
       console.log("Email sent successfully:", result);
       setIsSubmitted(true);
@@ -137,7 +165,7 @@ const ContactSection = () => {
   const Floating3DShape = ({
     shape,
     size,
-    color,
+
     delay,
     duration,
     x,
@@ -619,7 +647,7 @@ const ContactSection = () => {
                       )}
                     </div>
 
-                    <button
+                    <button onClick={onSubmit}
                       type="submit"
                       disabled={isSubmitting}
                       className="w-full group relative bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white py-4 px-8 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg hover:shadow-purple-500/50"
