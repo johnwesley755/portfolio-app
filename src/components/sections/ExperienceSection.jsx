@@ -442,7 +442,7 @@ const ExperienceCard = ({ experience, index, isInView }) => {
                 </motion.div>
 
                 <div className="flex-1">
-                  <h3 className="text-3xl font-bold text-white mb-2 leading-tight">
+                  <h3 className="text-3xl font-extrabold text-white mb-2 leading-tight">
                     {experience.title}
                   </h3>
 
@@ -616,12 +616,12 @@ const ExperienceSection = () => {
             whileHover={{ scale: 1.05 }}
           >
             <Sparkles className="w-8 h-8 text-yellow-400" />
-            <span className="text-yellow-400 font-semibold text-lg tracking-wider uppercase">
+            <span className="text-yellow-400 font-bold text-lg tracking-wider uppercase">
               Professional Journey
             </span>
           </motion.div>
 
-          <h2 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent mb-8 leading-tight">
+          <h2 className="text-5xl md:text-7xl font-extrabold bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent mb-8 leading-tight">
             Experience & Certifications
           </h2>
 

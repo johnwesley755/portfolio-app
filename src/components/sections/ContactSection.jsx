@@ -525,7 +525,7 @@ const ContactSection = () => {
             <span className="text-gray-300 text-sm">Let's Connect</span>
           </div>
 
-          <h2 className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent mb-6">
+          <h2 className="text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent mb-6">
             Get In Touch
           </h2>
 

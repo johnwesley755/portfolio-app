@@ -89,7 +89,7 @@ const Header = () => {
           >
             <a
               href="#home"
-              className={`text-2xl font-bold bg-gradient-to-r ${
+              className={`text-4xl font-extrabold bg-gradient-to-r ${
                 theme === "dark"
                   ? "from-blue-400 via-purple-500 to-pink-500"
                   : "from-blue-600 via-purple-600 to-pink-600"
@@ -115,7 +115,7 @@ const Header = () => {
                   href={link.href}
                   download={link.download}
                   onClick={() => setActiveLink(link.name)}
-                  className={`relative px-4 py-2 rounded-full font-medium transition-all duration-300 ${
+                  className={`relative px-4 py-2 rounded-full font-bold transition-all duration-300 ${
                     activeLink === link.name
                       ? theme === "dark"
                         ? "text-white bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30"

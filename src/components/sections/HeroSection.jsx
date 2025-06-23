@@ -257,17 +257,17 @@ const HeroSection = () => {
           <div className="space-y-8 lg:space-y-12 text-center lg:text-left">
             {/* Greeting */}
             <div className="space-y-4">
-              <div className="inline-flex items-center px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full text-sm text-gray-300">
+              <div className="inline-flex items-center px-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full text-sm text-gray-300">
                 <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
                 Available for new opportunities
               </div>
 
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-black leading-tight">
+              <h1 className="text-6xl md:text-6xl lg:text-7xl font-black leading-tight">
                 <span className="block text-white mb-2">Hi, I'm</span>
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
                   John Wesley
                 </span>
-                <span className="inline-block text-4xl animate-wave ml-4">
+                <span className="inline-block text-6xl animate-wave ml-4">
                   👋
                 </span>
               </h1>

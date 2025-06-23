@@ -222,8 +222,8 @@ const AboutSection = () => {
                   <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-3xl shadow-xl">
                     🎓
                   </div>
-                  <div>
-                    <h3 className="text-3xl font-bold text-white">
+                  <div className="space-y-1">
+                    <h3 className="text-3xl max-sm:text-2xl font-extrabold text-white">
                       My Journey
                     </h3>
                     <p className="text-purple-300 text-sm">
@@ -262,8 +262,8 @@ const AboutSection = () => {
                   <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-teal-500 rounded-2xl flex items-center justify-center text-3xl shadow-xl">
                     💭
                   </div>
-                  <div>
-                    <h3 className="text-3xl font-bold text-white">
+                  <div className="space-y-1">
+                    <h3 className="text-3xl font-extrabold max-sm:text-2xl text-white">
                       Philosophy
                     </h3>
                     <p className="text-blue-300 text-sm">Code with Purpose</p>
@@ -496,26 +496,27 @@ const AboutSection = () => {
         </motion.div>
 
         {/* Call to Action */}
-        <motion.div className="text-center" variants={itemVariants}>
+        <motion.div className="text-center px-4" variants={itemVariants}>
           <motion.div
-            className="inline-flex items-center gap-6 backdrop-blur-2xl bg-gradient-to-r from-purple-500/20 to-pink-500/20 px-12 py-6 rounded-full border border-white/20 hover:border-white/40 transition-all duration-300 group cursor-pointer"
+            className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 backdrop-blur-2xl bg-gradient-to-r from-purple-500/20 to-pink-500/20 w-full max-w-xl mx-auto px-4 sm:px-10 py-5 rounded-2xl sm:rounded-full border border-white/20 hover:border-white/40 transition-all duration-300 group cursor-pointer"
             whileHover={{
-              scale: 1.1,
-              rotateY: 10,
-              boxShadow: "0 25px 50px rgba(0,0,0,0.4)",
+              scale: 1.03,
+              rotateY: 5,
+              boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
             }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <span className="text-white font-bold text-xl">
+            <span className="text-white font-bold text-base sm:text-xl text-center sm:text-left">
               Let's Build Something Amazing Together!
             </span>
+
             <motion.div
-              className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-xl"
+              className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-xl"
               whileHover={{ rotate: 360, scale: 1.2 }}
               transition={{ duration: 0.6 }}
             >
-              <span className="text-2xl">🚀</span>
+              <span className="text-2xl sm:text-3xl">🚀</span>
             </motion.div>
           </motion.div>
         </motion.div>
