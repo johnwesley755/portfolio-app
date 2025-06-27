@@ -10,6 +10,7 @@ const Layout = ({ children }) => {
 
   return (
     <div className="flex flex-col min-h-screen bg-white text-black dark:bg-black/30 dark:text-white">
+     
       <Header />
       <main className="flex-grow">{children}</main>
       <Footer />

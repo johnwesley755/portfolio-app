@@ -1,36 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Layout from "./components/layout/Layout";
-import Home from "./pages/Home";
+import * as THREE from "three";
 
-// Loader Component
-const PortfolioLoader = ({ onLoadingComplete }) => {
+const PortfolioLoader = () => {
+  const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
-  const [threeLoaded, setThreeLoaded] = useState(false);
   const mountRef = useRef(null);
   const sceneRef = useRef(null);
   const animationIdRef = useRef(null);
 
-  // Load Three.js dynamically
   useEffect(() => {
-    const loadThreeJS = async () => {
-      try {
-        const THREE = await import("three");
-        window.THREE = THREE.default || THREE;
-        setThreeLoaded(true);
-      } catch {
-        console.warn("Three.js not available, using fallback animation");
-        setThreeLoaded(false);
-      }
-    };
-
-    loadThreeJS();
-  }, []);
-
-  useEffect(() => {
-    if (!threeLoaded || !mountRef.current || !window.THREE) return;
-
-    const THREE = window.THREE;
+    if (!mountRef.current) return;
 
     // Scene setup
     const scene = new THREE.Scene();
@@ -146,7 +125,7 @@ const PortfolioLoader = ({ onLoadingComplete }) => {
       }
       renderer.dispose();
     };
-  }, [threeLoaded]);
+  }, []);
 
   // Progress simulation
   useEffect(() => {
@@ -154,7 +133,7 @@ const PortfolioLoader = ({ onLoadingComplete }) => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
-          setTimeout(() => onLoadingComplete(), 800);
+          setTimeout(() => setLoading(false), 500);
           return 100;
         }
         return prev + Math.random() * 10;
@@ -162,7 +141,9 @@ const PortfolioLoader = ({ onLoadingComplete }) => {
     }, 200);
 
     return () => clearInterval(interval);
-  }, [onLoadingComplete]);
+  }, []);
+
+  if (!loading) {
 
   return (
     <div className="fixed inset-0 bg-black text-white flex items-center justify-center z-50">
@@ -174,10 +155,10 @@ const PortfolioLoader = ({ onLoadingComplete }) => {
         {/* Main title with glow effect */}
         <div className="space-y-4">
           <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-blue-400 bg-clip-text text-transparent animate-pulse">
-            Loading Portfolio
+            Loading Experience
           </h1>
           <div className="text-gray-400 text-lg tracking-widest uppercase">
-            Crafting Digital Experience
+            Crafting Digital Magic
           </div>
         </div>
 
@@ -227,41 +208,25 @@ const PortfolioLoader = ({ onLoadingComplete }) => {
             transform: translateX(400%);
           }
         }
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
         .animate-shimmer {
           animation: shimmer 2s infinite;
+        }
+        .animate-fadeIn {
+          animation: fadeIn 1s ease-out;
         }
       `}</style>
     </div>
   );
 };
-
-function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  const handleLoadingComplete = () => {
-    setIsLoading(false);
-  };
-
-  return (
-    <>
-      {isLoading ? (
-        <PortfolioLoader onLoadingComplete={handleLoadingComplete} />
-      ) : (
-        <Router>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Layout>
-                  <Home />
-                </Layout>
-              }
-            />
-          </Routes>
-        </Router>
-      )}
-    </>
-  );
 }
-
-export default App;
+export default PortfolioLoader;
