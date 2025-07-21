@@ -16,25 +16,26 @@ import {
 const projects = [
   {
     id: 1,
-    title: "Namma Isai",
-    year: "2024",
+    title: "AI Calling Agent",
+    year: "2025",
     description:
-      "A custom-built music player with playlists, local storage, and responsive UI. Features include audio visualization, custom themes, and seamless playback controls.",
+      "Intelligent call automation with context awareness and personalized conversation flows that adapt in real-time to user preferences",
     image:
-      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=500&h=300&fit=crop",
-    role: "Frontend Development",
-    techStack: ["HTML", "CSS", "JavaScript", "Firebase"],
-    demoLink: "https://namma-isai-music.vercel.app/",
-    githubLink: "https://github.com/johnwesley755/namma-isai-music",
+      "https://www.intervuebox.ai/wp-content/uploads/2025/06/how-cut-candidate-no-shows-ai-calling-agents.png",
+    role: "Full Stack Web Development",
+    techStack: ["React", "Node.js", "Express", "Gemini API"],
+    demoLink: "https://ai-calling-agent-ashen.vercel.app/",
+    githubLink: "https://github.com/johnwesley755/ai-calling-agent",
     category: "Web App",
     status: "Live",
     featured: true,
-    stars: 128,
+    stars: 267,
   },
+
   {
     id: 2,
     title: "AI Text-to-Video Generation",
-    year: "2024",
+    year: "2025",
     description:
       "Developed application converting text prompts into AI-generated videos using advanced diffusion models",
     image:
@@ -154,20 +155,20 @@ const projects = [
   },
   {
     id: 9,
-    title: "BPO Automation Application",
-    year: "2025",
+    title: "Namma Isai",
+    year: "2024",
     description:
-      "A modern web application for automating Business Process Outsourcing (BPO) calls using AI-powered voice agents.",
+      "A custom-built music player with playlists, local storage, and responsive UI. Features include audio visualization, custom themes, and seamless playback controls.",
     image:
-      "https://img.freepik.com/free-vector/man-robot-with-computers-sitting-together-workplace-artificial-intelligence-workforce-future-flat-illustration_74855-20635.jpg?ga=GA1.1.1436923625.1750582702&semt=ais_hybrid&w=740",
-    role: "Full Stack Web Development",
-    techStack: ["React", "Node.js", "Express", "Gemini API"],
-    demoLink: "https://github.com/johnwesley755/bpo-automation",
-    githubLink: "https://github.com/johnwesley755/bpo-automation",
+      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=500&h=300&fit=crop",
+    role: "Frontend Development",
+    techStack: ["HTML", "CSS", "JavaScript", "Firebase"],
+    demoLink: "https://namma-isai-music.vercel.app/",
+    githubLink: "https://github.com/johnwesley755/namma-isai-music",
     category: "Web App",
-    status: "Beta",
+    status: "Live",
     featured: true,
-    stars: 267,
+    stars: 128,
   },
 ];
 
